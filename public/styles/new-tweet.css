@@ -1,0 +1,34 @@
+button {
+  background:#4056A1;
+  color: white;
+  margin-top: 0.7em;
+}
+
+form > div {
+  display: flex;
+  justify-content : space-between;  
+}
+
+#tweet {
+  display:flex;
+  flex-direction: column;
+  border-bottom: solid;
+}
+
+#tweet-text {
+  border: none; 
+  background-color: #f4f1ec; 
+  padding-top:0.5em;    
+}
+
+#tweet-text:focus{
+ outline: 0;
+}
+
+.counter {
+  margin-top: 0.5em;
+}
+
+.exceeds-limit {
+  color:red;
+}

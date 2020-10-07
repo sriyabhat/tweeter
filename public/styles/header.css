@@ -1,0 +1,19 @@
+header {
+  height : 400px;
+  background: #ff9900;
+  display:flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+}
+
+header>div>img {
+  width: 10em;
+  height: 10em;
+}
+
+.nav>div>i{
+  color:red;
+}
+     
+

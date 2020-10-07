@@ -28,6 +28,7 @@ const createTweetElement = (tweetObj) => {
   return output;
 };
 
+
 let data = [
   {
     "user": {
@@ -60,9 +61,28 @@ const renderTweet = (tweets) => {
   }
 }
 
+ 
 
 $(document).ready(function(){
+  
+  //Post the Tweet
+  $("form").on("submit",function(event) {  
+    //prevents the default behaviour of the form sending the post request and reloading the page.
+    event.preventDefault();    
+    //handle the post request asynchronously.
+     $.ajax({
+       url : '/tweets/',
+       method : 'POST',
+       data : $(this).serialize()
+     }).then(result => {
+       console.log('successfull');
+     });
+  });
+  
+
   renderTweet(data);
+
+
   $(".tweets").on('mouseover',function(event){
     $(event.currentTarget).children(".tweet-header").children("a").removeClass("hidden");    
   });
@@ -70,4 +90,5 @@ $(document).ready(function(){
   $(".tweets").on('mouseleave',function(){
     $(event.currentTarget).children(".tweet-header").children("a").addClass("hidden");
   });
+
 });

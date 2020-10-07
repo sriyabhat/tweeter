@@ -28,32 +28,6 @@ const createTweetElement = (tweetObj) => {
   return output;
 };
 
-
-let data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": "https://i.imgur.com/73hZDYK.png",
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1461116232227
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": "https://i.imgur.com/nlhLi3I.png",
-      "handle": "@rd"
-     },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1461113959088
-  }
-]
-
 const renderTweet = (tweets) => {
   for(let tweetObj of tweets) {
     const tweet = createTweetElement(tweetObj);
@@ -61,10 +35,23 @@ const renderTweet = (tweets) => {
   }
 }
 
- 
+//get the tweets from the Server in JSON format
+const loadTweets = () => {  
+  $.ajax({
+    url : '/tweets',
+    method : 'GET'
+  }).then(result => {
+    renderTweet(result);;
+  }).catch(error => {
+    console.log(error);
+  });
+}; 
 
-$(document).ready(function(){
-  
+
+$(document).ready(function(){  
+
+  loadTweets();
+
   //Post the Tweet
   $("form").on("submit",function(event) {  
     //prevents the default behaviour of the form sending the post request and reloading the page.
@@ -78,10 +65,6 @@ $(document).ready(function(){
        console.log('successfull');
      });
   });
-  
-
-  renderTweet(data);
-
 
   $(".tweets").on('mouseover',function(event){
     $(event.currentTarget).children(".tweet-header").children("a").removeClass("hidden");    

@@ -4,6 +4,7 @@ const setCounter = function(){
 
   //add a class exceeds-limit if the counter value goes below 0.
   (counter < 0) ? $("[name=counter]").addClass("exceeds-limit") : $("[name=counter]").removeClass("exceeds-limit");
+  return counter;
 };
 
 $(document).ready(function(){
@@ -14,8 +15,15 @@ $(document).ready(function(){
 
   $("#tweet-text").on('keyup',function(event){   
     if((event.key === 'Backspace')||(event.key === 'Delete')){
-      setCounter();      
+      counter = setCounter(); 
+      if(counter >= 0) {
+        $(".error").addClass("hidden");
+      }     
     }
-  });    
+  }); 
+  
+  $("#tweet-text").on('keypress',function(){     
+    $(".error").addClass("hidden");          
+  });
 
 });

@@ -104,7 +104,8 @@ $(document).ready(function(){
         loadTweets(true);        
       });
     } else {
-      alert(error);      
+      $(".error").children("span").text(error);
+      $(".error").removeClass("hidden");      
     }    
   });  
 });

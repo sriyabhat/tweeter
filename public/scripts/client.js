@@ -28,12 +28,25 @@ const createTweetElement = (tweetObj) => {
   return output;
 };
 
+const renderStyle = () => {
+  $(".tweets").on('mouseover',function(event){
+    debugger;
+    $(event.currentTarget).children(".tweet-header").children("a").removeClass("hidden");    
+  });
+  
+  $(".tweets").on('mouseleave',function(event){
+    debugger;
+    $(event.currentTarget).children(".tweet-header").children("a").addClass("hidden");
+  });
+};
+
 const renderTweet = (tweets) => {
   for(let tweetObj of tweets) {
     const tweet = createTweetElement(tweetObj);
     $('.tweets-container').append(tweet);
+    renderStyle();
   }
-}
+};
 
 //get the tweets from the Server in JSON format
 const loadTweets = () => {  
@@ -47,31 +60,36 @@ const loadTweets = () => {
   });
 }; 
 
+const isInvalidTweet = (tweet) => {  
+  if (!tweet) {
+    return 'Please add some text to Tweet'; 
+  }
+  if(tweet.length > 140) {
+    return 'Tweet content is too long';
+  }
+  return false;
+}
 
 $(document).ready(function(){  
 
-  loadTweets();
+  loadTweets();  
 
   //Post the Tweet
   $("form").on("submit",function(event) {  
     //prevents the default behaviour of the form sending the post request and reloading the page.
-    event.preventDefault();    
-    //handle the post request asynchronously.
-     $.ajax({
-       url : '/tweets/',
-       method : 'POST',
-       data : $(this).serialize()
-     }).then(result => {
-       console.log('successfull');
-     });
-  });
-
-  $(".tweets").on('mouseover',function(event){
-    $(event.currentTarget).children(".tweet-header").children("a").removeClass("hidden");    
-  });
-
-  $(".tweets").on('mouseleave',function(){
-    $(event.currentTarget).children(".tweet-header").children("a").addClass("hidden");
-  });
-
+    event.preventDefault();
+    const error = isInvalidTweet($("#tweet-text").val());
+    if(!error) {
+      //handle the post request asynchronously.
+      $.ajax({
+        url : '/tweets/',
+        method : 'POST',
+        data : $(this).serialize()
+      }).then(result => {
+          console.log('successfull');
+      });
+    } else {
+      alert(error);      
+    }    
+  });  
 });

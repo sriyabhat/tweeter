@@ -2,19 +2,20 @@ header {
   margin-top: 120px;
   height : 400px;
   background: #ff9900;
+  color: white;
   display:flex;
   flex-direction: column;
   justify-content:center;
   align-items: center;
 }
 
-header>div>img {
+/* header>div>img {
   width: 10em;
   height: 10em;
-}
+} */
 
-.nav>div>i{
-  color:red;
-}
-     
 
+
+header>div>p {
+  font-size:1.5em;
+}

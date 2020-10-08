@@ -17,6 +17,11 @@
 }
 i {
   color:#4056A1;
+  padding: 0.5em;
+}
+
+.tweet-footer>label {
+  padding : 0.5em;
 }
 
 .tweet-header>div{
@@ -38,6 +43,9 @@ i {
   margin:1em;
 }
 
+.tweet-text p {
+  color:black;
+}
 .tweet-header>div>label{
   margin:0.8em;
 }

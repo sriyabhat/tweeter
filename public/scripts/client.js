@@ -10,7 +10,7 @@ const createTweetElement = (tweetObj) => {
   //-----------------------------------------------
   //tweet-text
   output += `<article class ="tweet-text">`;
-  output += `<h6>${tweetObj["content"].text}</h6>`;
+  output += `<p>${tweetObj["content"].text}</p>`;
   output += `</article>`;
   //-----------------------------------------------
   //tweet-footer
@@ -29,13 +29,11 @@ const createTweetElement = (tweetObj) => {
 };
 
 const renderStyle = () => {
-  $(".tweets").on('mouseover',function(event){
-    debugger;
+  $(".tweets").on('mouseover',function(event){    
     $(event.currentTarget).children(".tweet-header").children("a").removeClass("hidden");    
   });
   
-  $(".tweets").on('mouseleave',function(event){
-    debugger;
+  $(".tweets").on('mouseleave',function(event){   
     $(event.currentTarget).children(".tweet-header").children("a").addClass("hidden");
   });
 };
@@ -43,18 +41,25 @@ const renderStyle = () => {
 const renderTweet = (tweets) => {
   for(let tweetObj of tweets) {
     const tweet = createTweetElement(tweetObj);
-    $('.tweets-container').append(tweet);
+    $('.tweets-container').prepend(tweet);
     renderStyle();
   }
 };
 
 //get the tweets from the Server in JSON format
-const loadTweets = () => {  
+const loadTweets = (afterPost) => {  
   $.ajax({
     url : '/tweets',
     method : 'GET'
   }).then(result => {
-    renderTweet(result);;
+    if(afterPost) {
+     let latestTweet = [];
+     latestTweet.push(result[result.length - 1]);
+     console.log(latestTweet);
+     renderTweet(latestTweet);
+    } else {
+      renderTweet(result);
+    }             
   }).catch(error => {
     console.log(error);
   });
@@ -85,8 +90,9 @@ $(document).ready(function(){
         url : '/tweets/',
         method : 'POST',
         data : $(this).serialize()
-      }).then(result => {
-          console.log('successfull');
+      }).then(() => {
+        $("#tweet-text").val("");
+        loadTweets(true);        
       });
     } else {
       alert(error);      

@@ -1,3 +1,9 @@
+const escape =  function(str) {
+  let div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
+
 //create a DOM structure for a tweet. 
 const createTweetElement = (tweetObj) => {
   let output  =`<article class = "tweets">`;
@@ -10,16 +16,16 @@ const createTweetElement = (tweetObj) => {
   //-----------------------------------------------
   //tweet-text
   output += `<article class ="tweet-text">`;
-  output += `<p>${tweetObj["content"].text}</p>`;
+  output += `<p>${escape(tweetObj["content"].text)}</p>`;
   output += `</article>`;
   //-----------------------------------------------
   //tweet-footer
   output += `<article class = "tweet-footer">`;
   output += `<label>10 days ago</label>`;
   output += `<div>`;
-  output += `<i class="fa fa-comment"></i>`;
-  output += `<i class="fa fa-retweet"></i>`;
-  output += `<i class="fa fa-heart"></i>`;
+  output += `<i class="fa fa-flag" aria-hidden="true"></i></i>`;
+  output += `<i class="fa fa-retweet" aria-hidden="true"></i>`;
+  output += `<i class="fa fa-heart" aria-hidden="true"></i>`;
   output += `</div>`;
   output += `</article>`;
   //-------------------------------
@@ -83,7 +89,9 @@ $(document).ready(function(){
   $("form").on("submit",function(event) {  
     //prevents the default behaviour of the form sending the post request and reloading the page.
     event.preventDefault();
+    
     const error = isInvalidTweet($("#tweet-text").val());
+    
     if(!error) {
       //handle the post request asynchronously.
       $.ajax({
@@ -92,6 +100,7 @@ $(document).ready(function(){
         data : $(this).serialize()
       }).then(() => {
         $("#tweet-text").val("");
+        $("[name=counter]").val("140");
         loadTweets(true);        
       });
     } else {

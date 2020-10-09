@@ -7,8 +7,8 @@ This repository is the starter code for the project: Students will fork and clon
 ## Final Product
 
 
-!["Screenshot of Mobile Layout"](https://github.com/sriyabhat/tweeter/tree/master/public/images/screen-shots/mobile-layout.png)
-!["Screenshot of Desktop Layout"](https://github.com/sriyabhat/tweeter/tree/master/public/images/screen-shots/desktop-layout.png)
+!["Screenshot of Mobile Layout"](https://github.com/sriyabhat/tweeter/tree/master/docs/mobile-layout.png)
+!["Screenshot of Desktop Layout"](https://github.com/sriyabhat/tweeter/tree/master/docs/desktop-layout.png)
 
 ## Getting Started
 

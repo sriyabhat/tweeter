@@ -5,7 +5,7 @@
 }
 
 .tweets {
-  border:1px solid;   
+  border:2px solid black;   
   margin-top:2em; 
 }
 .tweet-footer{  
@@ -45,11 +45,42 @@ i {
 
 .tweet-text p {
   color:black;
+  word-wrap: break-word;
+  font-size:1.2em;
 }
 .tweet-header>div>label{
   margin:0.8em;
 }
 
-.tweets:hover{
+.tweets:hover{  
   box-shadow: 5px 10px #b9bfd1;  
+}
+
+@media only screen and (min-width : 1024px) {
+  
+  body {
+    display : flex;
+    flex-direction: row;
+    justify-content: space-between;           
+  }
+
+  main {
+    margin : none;
+    margin-top :5em;
+  }
+
+  header {
+    margin-top: 8em;
+    height: 18em;
+    width: 18em;
+    margin-left: 4em;
+  }
+
+  nav{
+    background-color: #4056A1;    
+  }
+  .tweets {
+    width: 45em;
+  }
+  
 }

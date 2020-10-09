@@ -5,18 +5,20 @@ const escape =  function(str) {
 }
 
 //calculate the time of the tweet
-const tweetTime = (time) => {
+const tweetTime = (time) => {  
   let today = new Date();
   let tweetDate = new Date(time);
   let timeDifference = today.getTime() - tweetDate.getTime();
   console.log(today);
   console.log(tweetDate);
   console.log("..............................");
-  let years = Math.floor(timeDifference/(1000 * 3600 * 24 * 12 * 365));
+  let years = Math.floor(timeDifference/(1000 * 3600 * 24 * 30 * 12));
+  console.log(timeDifference);
+  console.log(years); 
   if(years > 0) {
     return `${years} years ago`;
   }
-  let months = Math.floor(timeDifference /(1000 * 3600 * 24 *12));
+  let months = Math.floor(timeDifference /(1000 * 3600 * 24 *30));  
   if(months > 0) {
     return `${months} months ago`;
   }
@@ -41,8 +43,7 @@ const tweetTime = (time) => {
 
 
 //create a DOM structure for a tweet. 
-const createTweetElement = (tweetObj) => {
-  debugger;
+const createTweetElement = (tweetObj) => {  
   let output  =`<article class = "tweets">`;
   //tweet-header
   output += `<article class = "tweet-header">`;
